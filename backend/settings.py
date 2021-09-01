@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import django_heroku
-import dj_database_url
 import os
 
 from pathlib import Path
@@ -23,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# SECRET_KEY = config('SECRET_KEY')DEBUG = config('DEBUG', default=False, cast=bool)DATABASES = {'default': dj_database_url.config(default=config('DATABASE_URL'))}
 SECRET_KEY = 'django-insecure-)0tg6e@(cji_d+f$@e&dxbecp@rnjllyq^_n@(n_a7p0bx)u^i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'backend-davtechx.herokuapp.com']
 
 
 # Application definition
@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'whitenoise.runserver_nostatic',
     'rest_framework',
     # Thrid Party APP
-    'DavtechxAPI'
+    'DavtechxAPI',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +140,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+DISABLE_COLLECSTATIC: 1
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
+
+
+WHITENOISE_USE_FINDERS = True
+TATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
